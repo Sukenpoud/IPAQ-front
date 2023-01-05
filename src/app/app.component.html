@@ -1,0 +1,24 @@
+<div>Client: {{clientID}}</div>
+
+<div *ngIf="email">
+  <div>Email: {{email}}</div>
+  <div>Nom: {{name}}</div>
+
+  <button (click)="logout()">LOGOUT</button>
+</div>
+<div *ngIf="!email">
+  <div id="g_id_onload" attr.data-client_id="{{clientID}}"
+    data-callback="handleCredentialResponse" data-auto_prompt="false"></div>
+
+  <div class="g_id_signin" data-type="standard">
+  </div>
+</div>
+
+
+<div *ngIf="email">
+  <button (click)="loadIps()">LOAD IPS</button>
+
+  <ul>
+    <li *ngFor="let item of ips">{{item.ipv4}}</li>
+  </ul>
+</div>
