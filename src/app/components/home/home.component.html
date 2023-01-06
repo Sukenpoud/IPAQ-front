@@ -1,0 +1,15 @@
+<button (click)="logout()">LOGOUT</button>
+
+<div>
+  <form>
+    <label for="inputIp">Adresse IP :</label>
+    <input type="text" id="inputIp" [(ngModel)]="inputip" name="inputip">
+    <button type="button" (click)="onSubmit()">Envoyer</button>
+  </form>
+  
+  <button (click)="loadIps()">LOAD IPS</button>
+
+  <ul>
+    <li *ngFor="let item of ips">{{item.ipv4}}</li>
+  </ul>
+</div>

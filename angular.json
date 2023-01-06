@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "front-test": {
+    "ipaq-front": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/front-test",
+            "outputPath": "dist/ipaq-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -65,18 +65,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "front-test:build"
+            "browserTarget": "ipaq-front:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "front-test:build:production"
+              "browserTarget": "ipaq-front:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "front-test:build"
+            "browserTarget": "ipaq-front:build"
           }
         },
         "test": {
@@ -113,16 +113,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "front-test:serve"
+            "devServerTarget": "ipaq-front:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "front-test:serve:production"
+              "devServerTarget": "ipaq-front:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "front-test"
+  "defaultProject": "ipaq-front"
 }

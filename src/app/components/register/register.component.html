@@ -1,0 +1,29 @@
+<form #form="ngForm" (ngSubmit)="register(form.value)" novalidate>
+    <div>
+      <label for="name">Nom :</label>
+      <input type="text" id="name" name="name" ngModel required>
+    </div>
+    <div>
+      <label for="email">Email :</label>
+      <input type="email" id="email" name="email" ngModel required>
+    </div>
+    <div>
+      <label for="password">Mot de passe :</label>
+      <input type="password" id="password" name="password" ngModel required>
+    </div>
+    <div>
+      <button type="submit" [disabled]="form.invalid">S'inscrire</button>
+    </div>
+</form>  
+
+<div>
+  <div id="g_id_onload" attr.data-client_id="{{clientID}}"
+    data-callback="handleCredentialResponse" data-auto_prompt="false"></div>
+
+  <div class="g_id_signin" data-type="standard">
+  </div>
+</div>
+
+<nav>
+  <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Connexion</a>
+</nav>
