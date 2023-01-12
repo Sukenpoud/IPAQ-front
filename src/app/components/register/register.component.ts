@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   clientID = environment.client_id;
   email?: string;
   name?: string;
+  error?: string;
   
   constructor(private authService: AuthService, private http: HttpClient) { }
 

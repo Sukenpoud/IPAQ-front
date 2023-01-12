@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -7,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
     private $token: string = '';
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         this.$token = window.sessionStorage.getItem('g_token') || '';
         console.log(this.$token);
     }
@@ -41,14 +42,14 @@ export class AuthService {
         return new Promise((resolve, reject) => {
             this.http.post('http://localhost:3001/api/auth/login', formData)
                 .subscribe((res) => {
-                    console.log('Enregistrement réussi !');
+                    console.log('Connexion réussie !');
                     resolve(res);
+                    this.router.navigate(['/']);
                 }, (err) => {
                     console.error('Erreur lors de l\'enregistrement : ', err);
-                    reject(err);
+                    reject('Erreur lors de la connexion : e-mail ou mot de passe incorrect');
                 })
         })
-        // console.log(formData);
     }
 
     register(formData: any) {
@@ -57,12 +58,12 @@ export class AuthService {
                 .subscribe((res) => {
                     console.log('Enregistrement réussi !');
                     resolve(res);
+                    this.router.navigate(['/login']);
                 }, (err) => {
                     console.error('Erreur lors de l\'enregistrement : ', err);
-                    reject(err);
+                    reject('Erreur lors de l\inscription : e-mail ou mot de passe incorrect');
                 })
         })
-        // console.log(formData);
     }
 
     logout() {

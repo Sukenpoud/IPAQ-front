@@ -1,29 +1,44 @@
-<form #form="ngForm" (ngSubmit)="register(form.value)" novalidate>
-    <div>
-      <label for="name">Nom :</label>
-      <input type="text" id="name" name="name" ngModel required>
-    </div>
-    <div>
-      <label for="email">Email :</label>
-      <input type="email" id="email" name="email" ngModel required>
-    </div>
-    <div>
-      <label for="password">Mot de passe :</label>
-      <input type="password" id="password" name="password" ngModel required>
-    </div>
-    <div>
-      <button type="submit" [disabled]="form.invalid">S'inscrire</button>
-    </div>
-</form>  
+<mat-card class="body-form">
+    <mat-card-title>Inscription</mat-card-title>
+  <mat-card-content>
+    <form #form="ngForm" (ngSubmit)="register(form.value)" novalidate>
+      <p>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Nom" name="name" ngModel required>
+        </mat-form-field>
+      </p>
 
-<div>
+      <p>
+        <mat-form-field>
+          <input type="email" matInput placeholder="E-mail" name="email" ngModel required>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Mot de passe" name="password" ngModel required>
+        </mat-form-field>
+      </p>
+
+      <p *ngIf="error" class="error">
+        {{ error }}
+      </p>
+
+      <div class="button">
+        <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Inscription</button>
+      </div>
+      <div class="button-sec">
+        <button type="button" routerLink="/login" mat-button >Connexion</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<div class="alt-login">
+  <div class="mat-h2">Inscription avec Google</div>
   <div id="g_id_onload" attr.data-client_id="{{clientID}}"
     data-callback="handleCredentialResponse" data-auto_prompt="false"></div>
 
   <div class="g_id_signin" data-type="standard">
   </div>
 </div>
-
-<nav>
-  <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Connexion</a>
-</nav>
