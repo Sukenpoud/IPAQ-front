@@ -18,15 +18,17 @@ export class IpService {
       };
 
     createIp(ip: string) {
-
-        this.http.post('http://localhost:3001/api/ip/create', {
-            ip: ip
-        }, this.httpOptions)
-        .subscribe(res => {
-            console.log(res);
-        }), (err) => {
-            console.log(err);
-        }
+        return new Promise((resolve, reject) => {
+            this.http.post('http://localhost:3001/api/ip/create', {
+                ip: ip
+            }, this.httpOptions)
+            .subscribe(res => {
+                console.log(res);
+                resolve(res);
+            }), (err) => {
+                console.log(err);
+            }
+        })
     }
 
     getIps() {
@@ -37,10 +39,23 @@ export class IpService {
                     authorization: window.sessionStorage.getItem('userToken')
                 }
             }).subscribe((ips) => {
-                resolve(ips); // ips présent dans le .then qui suit l'appel de la méthode getIps() 
+                resolve(ips);
             }, (err) => {
-                reject(); // ips présent dans le .catch qui suit l'appel de la méthode getIps() 
+                reject();
             })
         })
+    }
+
+    deleteIp(ipId: string) {
+        return new Promise((resolve, reject) => {
+            this.http.delete('http://localhost:3001/api/ip/'+ipId , this.httpOptions)
+            .subscribe(res => {
+                console.log(res);
+                resolve(res);
+            }), (err) => {
+                console.log(err);
+                reject(err);
+            }
+        });
     }
 }

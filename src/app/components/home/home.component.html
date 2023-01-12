@@ -1,15 +1,59 @@
-<button (click)="logout()">LOGOUT</button>
+<button (click)="logout()" mat-button><mat-icon>logout</mat-icon> Déconnexion</button>
 
-<div>
-  <form>
-    <label for="inputIp">Adresse IP :</label>
-    <input type="text" id="inputIp" [(ngModel)]="inputip" name="inputip">
-    <button type="button" (click)="onSubmit()">Envoyer</button>
-  </form>
+<div class="container">
+  <div class="mat-headline">IP Air Quality</div>
+
+  <mat-card class="ip-form">
+      <mat-card-title>Calculez la qualité de l'air avec une adresse IP</mat-card-title>
+      <mat-card-subtitle>(laissez vide pour utiliser votre IP actuelle)</mat-card-subtitle>
+    <mat-card-content>
+      <form>
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Adresse IP" name="inputip" [(ngModel)]="inputip">
+          </mat-form-field>
+        </p>
   
-  <button (click)="loadIps()">LOAD IPS</button>
+        <div class="button">
+          <button type="button" (click)="onSubmit()" mat-raised-button color="primary">Calculer</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 
-  <ul>
-    <li *ngFor="let item of ips">{{item.ipv4}}</li>
-  </ul>
+  <div class="loader" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <mat-card class="ip-added" *ngIf="addedIp">
+      <mat-card-title>{{addedIp.ipv4}}</mat-card-title>
+    <mat-card-content>
+      <div>{{addedIp.city}}, {{addedIp.region}}, {{addedIp.country}}</div>
+      <div>Qualité de l'air : {{addedIp.pollution.aqius}} US AQI</div>
+      <div>Plus gros polluant : {{addedIp.pollution.mainus}}</div>
+      <div><img src="https://www.airvisual.com/images/{{addedIp.weather.ic}}.png" style="width:24px;"> {{addedIp.weather.tp}} °C</div>
+    </mat-card-content>
+  </mat-card>
+
+
+  <div class="ip-list">
+    <mat-card-title>Historique</mat-card-title>
+    <mat-accordion *ngIf="ips">
+      <mat-expansion-panel *ngFor="let item of ips.slice().reverse()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{item.ipv4}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>{{item.city}}, {{item.region}}, {{item.country}}</div>
+        <div>Qualité de l'air : {{item.pollution.aqius}} US AQI</div>
+        <div>Plus gros polluant : {{item.pollution.mainus}}</div>
+        <div><img src="https://www.airvisual.com/images/{{item.weather.ic}}.png" style="width:24px;"> {{item.weather.tp}} °C</div>
+        <button (click)="delete(item._id)" mat-mini-fab color="warn" aria-label="Supprimer adresse IP">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-expansion-panel>
+    </mat-accordion>
+    
+  </div>
 </div>
