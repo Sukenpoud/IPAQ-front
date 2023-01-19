@@ -16,6 +16,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDividerModule} from '@angular/material/divider';
+import { NgxSoapModule } from 'ngx-soap';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatButtonModule,
     MatExpansionModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDividerModule,
+    NgxSoapModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]

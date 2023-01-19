@@ -7,7 +7,7 @@
     text-align: center;
 }
 
-.ip-form, .ip-added {
+.ip-form, .ip-added, .ip-list {
     margin-bottom:2em;
 }
 
@@ -30,4 +30,61 @@
     display: flex;
     justify-content: center;
     margin-bottom: 2em;
+}
+.entete {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 12px;
+}
+.address {
+    font-weight: bold;
+}
+
+.btn-delete {
+    text-align: right;
+}
+
+.bold {
+    font-weight: bold; 
+}
+
+.mat-expansion-panel-body {
+    font-size: 1.2em;
+}
+
+/* IP ajoutée */
+.ip-added .mat-divider {
+    position: static;
+}
+
+/* Bareme */
+.airvisual-cards {
+    display: flex;
+    gap:10px;
+}
+.airvisual-cards mat-card {
+    width:16.66%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.good {
+    background-color:#9cd84e;
+}
+.mid {
+    background-color:#facf39;
+}
+.bit-bad {
+    background-color:#f99049;
+}
+.bad {
+    background-color:#f65e5f;
+}
+.very-bad {
+    background-color:#a070b6;
+}
+.dangerous {
+    background-color:#a06a7b;
 }

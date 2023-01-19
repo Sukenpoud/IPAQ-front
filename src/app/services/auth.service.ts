@@ -10,7 +10,7 @@ export class AuthService {
 
     constructor(private http: HttpClient, private router: Router) {
         this.$token = window.sessionStorage.getItem('g_token') || '';
-        console.log(this.$token);
+        // console.log(this.$token);
     }
 
     hasToken() {

@@ -28,32 +28,91 @@
   <mat-card class="ip-added" *ngIf="addedIp">
       <mat-card-title>{{addedIp.ipv4}}</mat-card-title>
     <mat-card-content>
-      <div>{{addedIp.city}}, {{addedIp.region}}, {{addedIp.country}}</div>
-      <div>Qualité de l'air : {{addedIp.pollution.aqius}} US AQI</div>
-      <div>Plus gros polluant : {{addedIp.pollution.mainus}}</div>
-      <div><img src="https://www.airvisual.com/images/{{addedIp.weather.ic}}.png" style="width:24px;"> {{addedIp.weather.tp}} °C</div>
+      <mat-card-content>
+        <div class="entete">
+          <div class="address">{{addedIp.city}}, {{addedIp.region}}, {{addedIp.country}}</div>
+          <div>{{addedIp.modificationDate}}</div>
+        </div>
+        <mat-divider></mat-divider>
+      </mat-card-content>
+      <mat-card-content>
+        <div>Qualité de l'air : <span class="bold">{{addedIp.pollution.aqius}} US AQI</span></div>
+        <div><p>Plus gros polluant : <span class="bold">{{addedIp.pollution.mainus}}</span></p></div>
+        <mat-divider></mat-divider>
+      </mat-card-content>
+      <div>
+        <p>Météo : <img src="{{addedIp.weather.ic}}" style="width:24px;">   <span class="bold">{{addedIp.weather.tp}} °C</span><br/>
+        Pression : <span class="bold">{{addedIp.weather.pr}} mbar</span><br/>
+        Vent : <span class="bold">{{addedIp.weather.ws}} km/h</span><br/>
+        Humidité : <span class="bold">{{addedIp.weather.hu}} %</span></p>
+      </div>
     </mat-card-content>
   </mat-card>
 
 
-  <div class="ip-list">
+  <div class="ip-list" *ngIf="ips && ips.length > 0">
     <mat-card-title>Historique</mat-card-title>
-    <mat-accordion *ngIf="ips">
+    <mat-accordion>
       <mat-expansion-panel *ngFor="let item of ips.slice().reverse()">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{item.ipv4}}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div>{{item.city}}, {{item.region}}, {{item.country}}</div>
-        <div>Qualité de l'air : {{item.pollution.aqius}} US AQI</div>
-        <div>Plus gros polluant : {{item.pollution.mainus}}</div>
-        <div><img src="https://www.airvisual.com/images/{{item.weather.ic}}.png" style="width:24px;"> {{item.weather.tp}} °C</div>
-        <button (click)="delete(item._id)" mat-mini-fab color="warn" aria-label="Supprimer adresse IP">
-          <mat-icon>delete</mat-icon>
-        </button>
+        <mat-card-content>
+          <div class="entete">
+            <div class="address">{{item.city}}, {{item.region}}, {{item.country}}</div>
+            <div>{{item.modificationDate}}</div>
+          </div>
+          <mat-divider></mat-divider>
+        </mat-card-content>
+        <mat-card-content>
+          <div>Qualité de l'air : <span class="bold">{{item.pollution.aqius}} US AQI</span></div>
+          <div><p>Plus gros polluant : <span class="bold">{{item.pollution.mainus}}</span></p></div>
+          <mat-divider></mat-divider>
+        </mat-card-content>
+        <div>
+          <p>Météo : <img src="{{item.weather.ic}}" style="width:24px;">   <span class="bold">{{item.weather.tp}} °C</span><br/>
+          Pression : <span class="bold">{{item.weather.pr}} mbar</span><br/>
+          Vent : <span class="bold">{{item.weather.ws}} km/h</span><br/>
+          Humidité : <span class="bold">{{item.weather.hu}} %</span></p>
+        </div>
+        <div class="btn-delete">
+          <button (click)="delete(item._id)" mat-mini-fab color="warn" aria-label="Supprimer adresse IP">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
-    
+
+  </div>
+  <div class="bareme">
+    <mat-card-title>Barême de l'indice de qualité de l'air (IQA US)</mat-card-title>
+    <div class="airvisual-cards">
+      <mat-card class="good">
+        <p>Bon</p>
+        <p>0-50</p>
+      </mat-card>
+      <mat-card class="mid">
+        <p>Moyen</p>
+        <p>51-100</p>
+      </mat-card>
+      <mat-card class="bit-bad">
+        <p>Mauvais pour les personnes sensibles</p>
+        <p>101-150</p>
+      </mat-card>
+      <mat-card class="bad">
+        <p>Mauvais pour la santé</p>
+        <p>151-200</p>
+      </mat-card>
+      <mat-card class="very-bad">
+        <p>Très mauvais pour la santé</p>
+        <p>201-300</p>
+      </mat-card>
+      <mat-card class="dangerous">
+        <p>Dangereux</p>
+        <p>301+</p>
+      </mat-card>
+    </div>
   </div>
 </div>

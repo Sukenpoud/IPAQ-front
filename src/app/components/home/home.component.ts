@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { IpService } from 'src/app/services/ip.service';
+import { NgxSoapService, Client, ISoapMethodResponse } from 'ngx-soap';
 
 @Component({
   selector: 'app-home',
@@ -9,16 +10,24 @@ import { IpService } from 'src/app/services/ip.service';
 })
 export class HomeComponent implements OnInit {
 
+  private soapClient: Client;
   ips?: any;
   inputip: string = '';
   addedIp: ipModel;
   addedIpIcon: string;
   isLoading: boolean = false;
 
-  constructor(private authService: AuthService, private ipService: IpService) { }
+  constructor(private authService: AuthService, private ipService: IpService, private soap: NgxSoapService) {
+    // CREATE SOAP CLIENT -> NOT WORKING
+    // this.soap.createClient('http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso?WSDL')
+    //   .then(client => {
+    //     this.soapClient = client;
+    //   });
+  }
 
   ngOnInit(): void {
     this.loadIps();
+    // this.getCountryByCode('FR');
   }
 
   logout() {
@@ -51,6 +60,18 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  // API SOAP TRY CALL
+  public getCountryByCode(code: string): void {
+    this.soapClient.call('CountryName', {sCountryISOCode: code}).subscribe(
+      (res: ISoapMethodResponse) => {
+        console.log(res.result.CountryNameResult);
+      },
+      error => {
+        console.log('Error: ', error);
+      }
+    );
+  }
+  
 }
 
 export interface ipModel {
